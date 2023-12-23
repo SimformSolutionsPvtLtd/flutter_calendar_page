@@ -176,6 +176,8 @@ class InternalWeekViewPage<T extends Object?> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final filteredDates = _filteredDate();
+    final isRtl = Directionality.of(context) == TextDirection.rtl;
+
     return Container(
       height: height + weekTitleHeight,
       width: width,
@@ -247,6 +249,7 @@ class InternalWeekViewPage<T extends Object?> extends StatelessWidget {
                     CustomPaint(
                       size: Size(width, height),
                       painter: hourLinePainter(
+                        isRtl: isRtl,
                         hourIndicatorSettings.color,
                         hourIndicatorSettings.height,
                         timeLineWidth + hourIndicatorSettings.offset,
@@ -296,6 +299,7 @@ class InternalWeekViewPage<T extends Object?> extends StatelessWidget {
                         height: height,
                         heightPerMinute: heightPerMinute,
                         timeLineWidth: timeLineWidth,
+                        isRtl: isRtl,
                       ),
                     Align(
                       alignment: Alignment.centerRight,

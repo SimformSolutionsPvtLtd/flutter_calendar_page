@@ -39,6 +39,14 @@ class HourLinePainter extends CustomPainter {
   /// Emulates offset of vertical line from hour line starts.
   final double emulateVerticalOffsetBy;
 
+  /// Indicates if the layout direction is right-to-left (RTL).
+  ///
+  /// This value is crucial for correctly drawing the table, especially
+  /// elements like the vertical line which change position based on
+  /// the layout direction. Pass this from parent contexts to ensure
+  /// accurate representation in RTL layouts.
+  final bool isRtl;
+
   /// Paints 24 hour lines.
   HourLinePainter({
     required this.lineColor,
@@ -51,6 +59,7 @@ class HourLinePainter extends CustomPainter {
     this.lineStyle = LineStyle.solid,
     this.dashWidth = 4,
     this.dashSpaceWidth = 4,
+    required this.isRtl,
   });
 
   @override
@@ -68,22 +77,29 @@ class HourLinePainter extends CustomPainter {
           canvas.drawLine(
               Offset(startX, dy), Offset(startX + dashWidth, dy), paint);
           startX += dashWidth + dashSpaceWidth;
+          if (isRtl && startX > size.width) break; // Stop drawing extra dashes
         }
       } else {
-        canvas.drawLine(Offset(dx, dy), Offset(size.width, dy), paint);
+        canvas.drawLine(Offset(isRtl ? size.width - offset : offset, dy),
+            Offset(isRtl ? 0 : size.width, dy), paint);
       }
     }
 
-    if (showVerticalLine) if (lineStyle == LineStyle.dashed) {
-      var startY = 0.0;
-      while (startY < size.height) {
-        canvas.drawLine(Offset(offset + verticalLineOffset, startY),
-            Offset(offset + verticalLineOffset, startY + dashWidth), paint);
-        startY += dashWidth + dashSpaceWidth;
+    if (showVerticalLine) {
+      final verticalOffset = isRtl ? size.width - offset : offset;
+      if (lineStyle == LineStyle.dashed) {
+        var startY = 0.0;
+        while (startY < size.height) {
+          canvas.drawLine(
+              Offset(verticalOffset + verticalLineOffset, startY),
+              Offset(verticalOffset + verticalLineOffset, startY + dashWidth),
+              paint);
+          startY += dashWidth + dashSpaceWidth;
+        }
+      } else {
+        canvas.drawLine(Offset(verticalOffset, 0),
+            Offset(verticalOffset, size.height), paint);
       }
-    } else {
-      canvas.drawLine(Offset(offset + verticalLineOffset, 0),
-          Offset(offset + verticalLineOffset, size.height), paint);
     }
   }
 
@@ -251,28 +267,33 @@ class CurrentTimeLinePainter extends CustomPainter {
   /// Radius of bullet.
   final double bulletRadius;
 
+  final bool isRtl;
+
   /// Paints a single horizontal line at [offset].
-  CurrentTimeLinePainter({
-    this.showBullet = true,
-    required this.color,
-    required this.height,
-    required this.offset,
-    this.bulletRadius = 5,
-  });
+  CurrentTimeLinePainter(
+      {this.showBullet = true,
+      required this.color,
+      required this.height,
+      required this.offset,
+      this.bulletRadius = 5,
+      required this.isRtl});
 
   @override
   void paint(Canvas canvas, Size size) {
+    double startX = isRtl ? 0 : size.width;
+    double endX = isRtl ? size.width - offset.dx : offset.dx;
     canvas.drawLine(
-      Offset(offset.dx, offset.dy),
-      Offset(size.width, offset.dy),
+      Offset(startX, offset.dy),
+      Offset(endX, offset.dy),
       Paint()
         ..color = color
         ..strokeWidth = height,
     );
 
-    if (showBullet)
+    if (showBullet) {
       canvas.drawCircle(
-          Offset(offset.dx, offset.dy), bulletRadius, Paint()..color = color);
+          Offset(endX, offset.dy), bulletRadius, Paint()..color = color);
+    }
   }
 
   @override

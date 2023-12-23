@@ -112,6 +112,8 @@ class InternalDayViewPage<T extends Object?> extends StatelessWidget {
   /// Emulate vertical line offset from hour line starts.
   final double emulateVerticalOffsetBy;
 
+  final bool isRtl;
+
   /// Defines a single day page.
   const InternalDayViewPage({
     Key? key,
@@ -145,6 +147,7 @@ class InternalDayViewPage<T extends Object?> extends StatelessWidget {
     required this.halfHourIndicatorSettings,
     required this.quarterHourIndicatorSettings,
     required this.emulateVerticalOffsetBy,
+    required this.isRtl,
   }) : super(key: key);
 
   @override
@@ -179,6 +182,7 @@ class InternalDayViewPage<T extends Object?> extends StatelessWidget {
                         hourIndicatorSettings.dashWidth,
                         hourIndicatorSettings.dashSpaceWidth,
                         emulateVerticalOffsetBy,
+                        isRtl: isRtl,
                       ),
                     ),
                     if (showHalfHours)
@@ -219,7 +223,10 @@ class InternalDayViewPage<T extends Object?> extends StatelessWidget {
                       minuteSlotSize: minuteSlotSize,
                     ),
                     Align(
-                      alignment: Alignment.centerRight,
+                      alignment: isRtl
+                          ? Alignment.centerLeft
+                          : Alignment
+                              .centerRight, // adjust alignment based on directionality
                       child: EventGenerator<T>(
                         height: height,
                         date: date,
@@ -256,6 +263,7 @@ class InternalDayViewPage<T extends Object?> extends StatelessWidget {
                           height: height,
                           heightPerMinute: heightPerMinute,
                           timeLineWidth: timeLineWidth,
+                          isRtl: isRtl,
                         ),
                       ),
                   ],
