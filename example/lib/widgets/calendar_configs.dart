@@ -1,9 +1,9 @@
 import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
 
-import '../app_colors.dart';
 import '../enumerations.dart';
 import '../extension.dart';
+import '../theme/app_colors.dart';
 import 'add_event_form.dart';
 
 class CalendarConfig extends StatefulWidget {

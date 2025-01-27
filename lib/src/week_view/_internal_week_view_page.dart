@@ -4,15 +4,9 @@
 
 import 'package:flutter/material.dart';
 
+import '../../calendar_view.dart';
 import '../components/_internal_components.dart';
-import '../components/event_scroll_notifier.dart';
-import '../components/week_view_components.dart';
-import '../enumerations.dart';
-import '../event_arrangers/event_arrangers.dart';
-import '../event_controller.dart';
-import '../modals.dart';
 import '../painters.dart';
-import '../typedefs.dart';
 
 /// A single page for week view.
 class InternalWeekViewPage<T extends Object?> extends StatefulWidget {
@@ -259,9 +253,10 @@ class _InternalWeekViewPageState<T extends Object?>
   @override
   Widget build(BuildContext context) {
     final filteredDates = _filteredDate();
+    final themeColor = context.weekViewColor;
+
     return Container(
-      color: widget.backgroundColor ??
-          Theme.of(context).colorScheme.surfaceContainerLowest,
+      color: widget.backgroundColor ?? themeColor.pageBackground,
       height: widget.height + widget.weekTitleHeight,
       width: widget.width,
       child: Column(
@@ -273,8 +268,7 @@ class _InternalWeekViewPageState<T extends Object?>
           SizedBox(
             width: widget.width,
             child: ColoredBox(
-              color: widget.weekTitleBackgroundColor ??
-                  Theme.of(context).colorScheme.surfaceContainerHigh,
+              color: widget.weekTitleBackgroundColor ?? themeColor.weekDayTile,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

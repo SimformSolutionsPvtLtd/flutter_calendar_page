@@ -431,7 +431,7 @@ class DayViewState<T extends Object?> extends State<DayView<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme;
+    final themeColor = context.weekViewColor;
 
     return SafeAreaWrapper(
       option: widget.safeAreaOption,
@@ -448,7 +448,7 @@ class DayViewState<T extends Object?> extends State<DayView<T>> {
               Expanded(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    color: widget.backgroundColor ?? color.surfaceContainerLow,
+                    color: widget.backgroundColor ?? themeColor.pageBackground,
                   ),
                   child: SizedBox(
                     height: _height,

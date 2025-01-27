@@ -28,8 +28,8 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         title: 'Flutter Calendar Page Demo',
         debugShowCheckedModeBanner: false,
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
         themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
         scrollBehavior: ScrollBehavior().copyWith(
           dragDevices: {

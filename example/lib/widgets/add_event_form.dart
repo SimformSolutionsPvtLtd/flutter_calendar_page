@@ -2,9 +2,9 @@ import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
-import '../app_colors.dart';
 import '../constants.dart';
 import '../extension.dart';
+import '../theme/app_colors.dart';
 import 'custom_button.dart';
 import 'date_time_selector.dart';
 
@@ -72,12 +72,12 @@ class _AddOrEditEventFormState extends State<AddOrEditEventForm> {
         children: [
           TextFormField(
             controller: _titleController,
-            decoration: AppConstants.inputDecoration.copyWith(
+            decoration: InputDecoration(
               labelText: "Event Title",
               labelStyle: TextStyle(
                 color: color.onSurfaceVariant,
               ),
-            ),
+            ).applyDefaults(Theme.of(context).inputDecorationTheme),
             style: TextStyle(
               color: color.onSurface,
               fontSize: 17.0,
@@ -101,12 +101,12 @@ class _AddOrEditEventFormState extends State<AddOrEditEventForm> {
             children: [
               Expanded(
                 child: DateTimeSelectorFormField(
-                  decoration: AppConstants.inputDecoration.copyWith(
+                  decoration: InputDecoration(
                     labelText: "Start Date",
                     labelStyle: TextStyle(
                       color: color.onSurfaceVariant,
                     ),
-                  ),
+                  ).applyDefaults(Theme.of(context).inputDecorationTheme),
                   initialDateTime: _startDate,
                   onSelect: (date) {
                     if (date.withoutTime.withoutTime
@@ -140,12 +140,12 @@ class _AddOrEditEventFormState extends State<AddOrEditEventForm> {
               Expanded(
                 child: DateTimeSelectorFormField(
                   initialDateTime: _endDate,
-                  decoration: AppConstants.inputDecoration.copyWith(
+                  decoration: InputDecoration(
                     labelText: "End Date",
                     labelStyle: TextStyle(
                       color: color.onSurfaceVariant,
                     ),
-                  ),
+                  ).applyDefaults(Theme.of(context).inputDecorationTheme),
                   onSelect: (date) {
                     if (date.withoutTime.withoutTime
                         .isBefore(_startDate.withoutTime)) {
@@ -184,12 +184,12 @@ class _AddOrEditEventFormState extends State<AddOrEditEventForm> {
             children: [
               Expanded(
                 child: DateTimeSelectorFormField(
-                  decoration: AppConstants.inputDecoration.copyWith(
+                  decoration: InputDecoration(
                     labelText: "Start Time",
                     labelStyle: TextStyle(
                       color: color.onSurfaceVariant,
                     ),
-                  ),
+                  ).applyDefaults(Theme.of(context).inputDecorationTheme),
                   initialDateTime: _startTime,
                   minimumDateTime: CalendarConstants.epochDate,
                   onSelect: (date) {
@@ -214,12 +214,12 @@ class _AddOrEditEventFormState extends State<AddOrEditEventForm> {
               SizedBox(width: 20.0),
               Expanded(
                 child: DateTimeSelectorFormField(
-                  decoration: AppConstants.inputDecoration.copyWith(
+                  decoration: InputDecoration(
                     labelText: "End Time",
                     labelStyle: TextStyle(
                       color: color.onSurfaceVariant,
                     ),
-                  ),
+                  ).applyDefaults(Theme.of(context).inputDecorationTheme),
                   initialDateTime: _endTime,
                   onSelect: (date) {
                     if (_startTime != null &&
@@ -268,10 +268,10 @@ class _AddOrEditEventFormState extends State<AddOrEditEventForm> {
 
               return null;
             },
-            decoration: AppConstants.inputDecoration.copyWith(
+            decoration: InputDecoration(
               hintText: "Event Description",
               counterStyle: TextStyle(color: color.onSurfaceVariant),
-            ),
+            ).applyDefaults(Theme.of(context).inputDecorationTheme),
           ),
           Align(
             alignment: Alignment.centerLeft,
@@ -289,6 +289,7 @@ class _AddOrEditEventFormState extends State<AddOrEditEventForm> {
               Radio(
                 value: RepeatFrequency.doNotRepeat,
                 groupValue: _selectedFrequency,
+                // activeColor: context.themeColor.primary,
                 onChanged: (value) {
                   setState(
                     () => _selectedFrequency = value,
@@ -477,9 +478,9 @@ class _AddOrEditEventFormState extends State<AddOrEditEventForm> {
           if (_selectedRecurrenceEnd == RecurrenceEnd.onDate)
             DateTimeSelectorFormField(
               initialDateTime: _recurrenceEndDate,
-              decoration: AppConstants.inputDecoration.copyWith(
+              decoration: InputDecoration(
                 labelText: 'Ends on',
-              ),
+              ).applyDefaults(Theme.of(context).inputDecorationTheme),
               onSelect: (date) {
                 if (date.withoutTime.isBefore(_endDate.withoutTime)) {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(

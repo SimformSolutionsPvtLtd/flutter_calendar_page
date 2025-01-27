@@ -650,7 +650,7 @@ class WeekViewState<T extends Object?> extends State<WeekView<T>> {
     _hourIndicatorSettings = widget.hourIndicatorSettings ??
         HourIndicatorSettings(
           height: widget.heightPerMinute,
-          color: Theme.of(context).colorScheme.surfaceContainerHighest,
+          color: context.weekViewColor.hourLine,
           offset: 5,
         );
 
@@ -664,7 +664,7 @@ class WeekViewState<T extends Object?> extends State<WeekView<T>> {
     _halfHourIndicatorSettings = widget.halfHourIndicatorSettings ??
         HourIndicatorSettings(
           height: widget.heightPerMinute,
-          color: Theme.of(context).colorScheme.surfaceContainerHighest,
+          color: context.weekViewColor.halfHourLine,
           offset: 5,
         );
 
@@ -673,7 +673,7 @@ class WeekViewState<T extends Object?> extends State<WeekView<T>> {
 
     _quarterHourIndicatorSettings = widget.quarterHourIndicatorSettings ??
         HourIndicatorSettings(
-          color: Theme.of(context).colorScheme.surfaceContainerHighest,
+          color: context.weekViewColor.quarterHourLine,
         );
 
     assert(_quarterHourIndicatorSettings.height < _hourHeight,

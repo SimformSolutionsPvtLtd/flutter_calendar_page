@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'app_colors.dart';
 import 'enumerations.dart';
+import 'theme/app_colors.dart';
 
 enum TimeStampFormat { parse_12, parse_24 }
 

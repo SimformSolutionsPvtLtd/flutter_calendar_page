@@ -232,17 +232,17 @@ class WeekDayTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme;
+    final themeColors = context.monthViewColor;
 
     return Container(
       alignment: Alignment.center,
       margin: EdgeInsets.zero,
       padding: EdgeInsets.symmetric(vertical: 10.0),
       decoration: BoxDecoration(
-        color: backgroundColor ?? color.surfaceContainerHigh,
+        color: backgroundColor ?? themeColors.weekDayTile,
         border: displayBorder
             ? Border.all(
-                color: borderColor ?? color.secondaryContainer,
+                color: borderColor ?? themeColors.weekDayBorder,
                 width: 0.5,
               )
             : null,
@@ -252,7 +252,7 @@ class WeekDayTile extends StatelessWidget {
         style: textStyle ??
             TextStyle(
               fontSize: 17,
-              color: color.onSecondaryContainer,
+              color: themeColors.weekDayText,
             ),
       ),
     );

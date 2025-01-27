@@ -1,3 +1,4 @@
+import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../extension.dart';
@@ -53,7 +54,10 @@ class _MobileHomePageState extends State<MobileHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.dark_mode),
+          child: Icon(
+            Icons.dark_mode,
+            color: context.themeColor.onPrimary,
+          ),
           onPressed: () {
             isDarkMode = !isDarkMode;
             if (widget.onChangeTheme != null) {

@@ -17,6 +17,8 @@ class DetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeColor = context.themeColor;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: event.color,
@@ -97,10 +99,14 @@ class DetailsPage extends StatelessWidget {
             children: [
               Expanded(
                 child: ElevatedButton(
-                  child: Text('Delete Event'),
+                  child: Text(
+                    'Delete Event',
+                    style: TextStyle(
+                      color: themeColor.onSecondaryContainer,
+                    ),
+                  ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        Theme.of(context).colorScheme.surfaceContainer,
+                    backgroundColor: Colors.white70,
                   ),
                   onPressed: () async {
                     await _handleDeleteEvent(context);
@@ -111,7 +117,12 @@ class DetailsPage extends StatelessWidget {
               SizedBox(width: 30),
               Expanded(
                 child: ElevatedButton(
-                  child: Text('Edit Event'),
+                  child: Text(
+                    'Edit Event',
+                    style: TextStyle(
+                      color: themeColor.onSecondaryContainer,
+                    ),
+                  ),
                   onPressed: () async {
                     final result = await Navigator.of(context).push(
                       MaterialPageRoute(
@@ -126,8 +137,7 @@ class DetailsPage extends StatelessWidget {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        Theme.of(context).colorScheme.surfaceContainer,
+                    backgroundColor: Colors.white70,
                   ),
                 ),
               ),

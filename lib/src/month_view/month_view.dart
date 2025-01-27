@@ -563,15 +563,14 @@ class MonthViewState<T extends Object?> extends State<MonthView<T>> {
     isInMonth,
     hideDaysNotInMonth,
   ) {
-    final color = Theme.of(context).colorScheme;
+    final themeColor = context.monthViewColor;
 
     if (hideDaysNotInMonth) {
       return FilledCell<T>(
         date: date,
         shouldHighlight: isToday,
-        backgroundColor: isInMonth
-            ? color.surfaceContainerLowest
-            : color.surfaceContainerLow,
+        backgroundColor:
+            isInMonth ? themeColor.cellInMonth : themeColor.cellNotInMonth,
         events: events,
         isInMonth: isInMonth,
         onTileTap: widget.onEventTap,
@@ -579,23 +578,22 @@ class MonthViewState<T extends Object?> extends State<MonthView<T>> {
         onTileLongTap: widget.onEventLongTap,
         dateStringBuilder: widget.dateStringBuilder,
         hideDaysNotInMonth: hideDaysNotInMonth,
-        titleColor: color.onPrimaryContainer,
+        titleColor: themeColor.cellText,
       );
     }
     return FilledCell<T>(
       date: date,
       shouldHighlight: isToday,
       backgroundColor:
-          isInMonth ? color.surfaceContainerLowest : color.surfaceContainerLow,
+          isInMonth ? themeColor.cellInMonth : themeColor.cellNotInMonth,
       events: events,
       onTileTap: widget.onEventTap,
       onTileLongTap: widget.onEventLongTap,
       dateStringBuilder: widget.dateStringBuilder,
       onTileDoubleTap: widget.onEventDoubleTap,
       hideDaysNotInMonth: hideDaysNotInMonth,
-      titleColor: isInMonth
-          ? color.onPrimaryContainer
-          : color.onSurfaceVariant.withAlpha(150),
+      titleColor:
+          isInMonth ? themeColor.cellText : themeColor.cellText.withAlpha(150),
     );
   }
 
@@ -716,7 +714,6 @@ class _MonthPageBuilder<T> extends StatelessWidget {
       hideDaysNotInMonth: hideDaysNotInMonth,
       showWeekends: weekDays == 7,
     );
-    final color = Theme.of(context).colorScheme;
 
     // Highlight tiles which is not in current month
     return SizedBox(
@@ -744,7 +741,7 @@ class _MonthPageBuilder<T> extends StatelessWidget {
               decoration: BoxDecoration(
                 border: showBorder
                     ? Border.all(
-                        color: borderColor ?? color.surfaceContainerHigh,
+                        color: borderColor ?? context.monthViewColor.cellBorder,
                         width: borderSize,
                       )
                     : null,

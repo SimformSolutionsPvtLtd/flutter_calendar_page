@@ -7,8 +7,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../../style/header_style.dart';
-import '../../typedefs.dart';
+import '../../../calendar_view.dart';
 
 class CalendarPageHeader extends StatelessWidget {
   /// When user taps on right arrow.
@@ -100,14 +99,14 @@ class CalendarPageHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme;
+    final themeColor = context.themeColor;
 
     return Container(
       margin: headerStyle.headerMargin,
       padding: headerStyle.headerPadding,
       decoration: headerStyle.decoration ??
           BoxDecoration(
-            color: backgroundColor ?? color.primaryContainer,
+            color: backgroundColor ?? themeColor.primary,
           ),
       clipBehavior: Clip.antiAlias,
       child: Row(
@@ -134,7 +133,7 @@ class CalendarPageHeader extends StatelessWidget {
                             size: headerStyle.leftIconConfig!.size,
                             color: iconColor ??
                                 headerStyle.leftIconConfig?.color ??
-                                color.onPrimaryContainer,
+                                context.themeColor.onPrimary,
                           ),
                     ),
               ),
@@ -154,7 +153,10 @@ class CalendarPageHeader extends StatelessWidget {
                                 secondaryDate: secondaryDate) ??
                             '',
                         textAlign: headerStyle.titleAlign,
-                        style: headerStyle.headerTextStyle,
+                        style: headerStyle.headerTextStyle ??
+                            TextStyle(
+                              color: themeColor.onPrimary,
+                            ),
                       ),
                     ),
                   ),
@@ -180,7 +182,7 @@ class CalendarPageHeader extends StatelessWidget {
                             size: headerStyle.rightIconConfig?.size,
                             color: iconColor ??
                                 headerStyle.rightIconConfig?.color ??
-                                color.onPrimaryContainer,
+                                themeColor.onPrimary,
                           ),
                     ),
               ),

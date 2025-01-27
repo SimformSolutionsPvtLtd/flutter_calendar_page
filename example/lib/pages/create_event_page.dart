@@ -11,24 +11,23 @@ class CreateEventPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme;
+    final themeColor = context.themeColor;
 
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: color.surfaceContainerHigh,
         centerTitle: false,
         leading: IconButton(
           onPressed: context.pop,
           icon: Icon(
             Icons.arrow_back,
-            color: color.onSurface,
+            color: themeColor.onPrimary,
           ),
         ),
         title: Text(
           event == null ? "Create New Event" : "Update Event",
           style: TextStyle(
-            color: color.onSurface,
+            color: themeColor.onPrimary,
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
           ),

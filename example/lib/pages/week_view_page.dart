@@ -1,3 +1,4 @@
+import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
 
 import '../enumerations.dart';
@@ -25,11 +26,15 @@ class _WeekViewDemoState extends State<WeekViewDemo> {
         primary: false,
         appBar: AppBar(
           leading: const SizedBox.shrink(),
-          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+          backgroundColor: context.themeColor.primary,
         ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          child: Icon(
+            Icons.add,
+            color: context.themeColor.onPrimary,
+          ),
           elevation: 8,
+          backgroundColor: context.themeColor.primary,
           onPressed: () => context.pushRoute(CreateEventPage()),
         ),
         body: WeekViewWidget(),
