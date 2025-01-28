@@ -7,9 +7,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants.dart';
-import '../../style/header_style.dart';
-import '../../typedefs.dart';
+import '../../../calendar_view.dart';
 
 class CalendarPageHeader extends StatelessWidget {
   /// When user taps on right arrow.
@@ -61,7 +59,7 @@ class CalendarPageHeader extends StatelessWidget {
   /// NOTE: This property is deprecated.
   /// Use [HeaderStyle.decoration] to provide colors to header.
   @Deprecated("Use HeaderStyle.decoration to provide background")
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   // TODO: Need to remove after next major release
   /// Color of icons at both sides of header.
@@ -90,7 +88,7 @@ class CalendarPageHeader extends StatelessWidget {
     this.showPreviousIcon = true,
     this.secondaryDate,
     @Deprecated("Use HeaderStyle.decoration to provide background")
-    this.backgroundColor = Constants.headerBackground,
+    this.backgroundColor,
     @Deprecated("Use HeaderStyle to provide icon color") this.iconColor,
     this.headerStyle = const HeaderStyle(),
   })  : assert(
@@ -101,11 +99,15 @@ class CalendarPageHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeColor = context.themeColor;
+
     return Container(
       margin: headerStyle.headerMargin,
       padding: headerStyle.headerPadding,
-      decoration:
-          headerStyle.decoration ?? BoxDecoration(color: backgroundColor),
+      decoration: headerStyle.decoration ??
+          BoxDecoration(
+            color: backgroundColor ?? themeColor.primary,
+          ),
       clipBehavior: Clip.antiAlias,
       child: Row(
         mainAxisSize: headerStyle.mainAxisSize,
@@ -129,8 +131,9 @@ class CalendarPageHeader extends StatelessWidget {
                           Icon(
                             Icons.chevron_left,
                             size: headerStyle.leftIconConfig!.size,
-                            color:
-                                iconColor ?? headerStyle.leftIconConfig!.color,
+                            color: iconColor ??
+                                headerStyle.leftIconConfig?.color ??
+                                context.themeColor.onPrimary,
                           ),
                     ),
               ),
@@ -150,7 +153,10 @@ class CalendarPageHeader extends StatelessWidget {
                                 secondaryDate: secondaryDate) ??
                             '',
                         textAlign: headerStyle.titleAlign,
-                        style: headerStyle.headerTextStyle,
+                        style: headerStyle.headerTextStyle ??
+                            TextStyle(
+                              color: themeColor.onPrimary,
+                            ),
                       ),
                     ),
                   ),
@@ -174,8 +180,9 @@ class CalendarPageHeader extends StatelessWidget {
                           Icon(
                             Icons.chevron_right,
                             size: headerStyle.rightIconConfig?.size,
-                            color:
-                                iconColor ?? headerStyle.rightIconConfig?.color,
+                            color: iconColor ??
+                                headerStyle.rightIconConfig?.color ??
+                                themeColor.onPrimary,
                           ),
                     ),
               ),

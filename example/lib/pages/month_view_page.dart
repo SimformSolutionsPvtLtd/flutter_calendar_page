@@ -1,3 +1,4 @@
+import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
 
 import '../enumerations.dart';
@@ -24,9 +25,18 @@ class _MonthViewPageDemoState extends State<MonthViewPageDemo> {
         selectedView: CalendarView.month,
       ),
       mobileWidget: Scaffold(
+        primary: false,
+        appBar: AppBar(
+          leading: const SizedBox.shrink(),
+          backgroundColor: context.themeColor.primary,
+        ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          child: Icon(
+            Icons.add,
+            color: context.themeColor.onPrimary,
+          ),
           elevation: 8,
+          backgroundColor: context.themeColor.primary,
           onPressed: () => context.pushRoute(CreateEventPage()),
         ),
         body: MonthViewWidget(),

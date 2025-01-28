@@ -1,6 +1,7 @@
+import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
 
-import '../app_colors.dart';
+import '../theme/app_colors.dart';
 
 class CustomButton extends StatelessWidget {
   final String title;
@@ -18,7 +19,7 @@ class CustomButton extends StatelessWidget {
           horizontal: 40,
         ),
         decoration: BoxDecoration(
-          color: AppColors.navyBlue,
+          color: context.themeColor.primary,
           borderRadius: BorderRadius.circular(7.0),
           boxShadow: [
             BoxShadow(
@@ -32,7 +33,7 @@ class CustomButton extends StatelessWidget {
         child: Text(
           title,
           style: TextStyle(
-            color: AppColors.white,
+            color: context.themeColor.onPrimary,
             fontSize: 20,
           ),
         ),

@@ -16,5 +16,7 @@ export './src/extensions.dart';
 export './src/modals.dart';
 export './src/month_view/month_view.dart';
 export './src/style/header_style.dart';
+export './src/theme/calendar_theme.dart';
+export './src/theme/calendar_theme_extension.dart'; // TODO(Shubham): Check if it is required
 export './src/typedefs.dart';
 export './src/week_view/week_view.dart';

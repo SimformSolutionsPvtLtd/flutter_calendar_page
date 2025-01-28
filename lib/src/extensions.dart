@@ -5,6 +5,8 @@
 import 'package:flutter/material.dart';
 
 import '../calendar_view.dart';
+import 'theme/month_view_theme.dart';
+import 'theme/week_view_theme.dart';
 
 T? ambiguate<T>(T? object) => object;
 
@@ -251,4 +253,17 @@ void debugLog(String message) {
 
     return false;
   }(), '');
+}
+
+extension BuildContextExtension on BuildContext {
+  // TODO(Shubham): Update here theme based if possible
+  CalendarThemeExtension get themeColor =>
+      Theme.of(this).extension<CalendarThemeExtension>() ??
+      CalendarThemeExtension();
+
+  MonthViewTheme get monthViewColor =>
+      Theme.of(this).extension<MonthViewTheme>() ?? MonthViewTheme();
+
+  WeekViewTheme get weekViewColor =>
+      Theme.of(this).extension<WeekViewTheme>() ?? WeekViewTheme();
 }
